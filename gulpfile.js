@@ -1,4 +1,6 @@
 const gulp = require('gulp')
+const del = require('del')
+const concat = require('gulp-concat')
 const babel = require('gulp-babel')
 const sass = require('gulp-sass')
 const browserSync = require('browser-sync').create()
@@ -19,7 +21,12 @@ function js() {
     .pipe(babel({
       presets: ['@babel/env']
     }))
+    .pipe(concat('main.js'))
     .pipe(gulp.dest('./dist/js'))
+}
+
+function clean() {
+  return del(['./dist'])
 }
 
 function watch() {
@@ -41,8 +48,9 @@ function watch() {
   gulp.watch('./dist/*.html').on('change', browserSync.reload)
 }
 
+exports.clean = clean
 exports.css = css
 exports.js = js
 exports.html = html
 exports.watch = watch
-exports.default = gulp.series(html, js, watch)
+exports.default = gulp.series(clean, html, js, css, watch)

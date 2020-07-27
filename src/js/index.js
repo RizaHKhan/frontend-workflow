@@ -1,13 +1,3 @@
-function calledit() {
-  console.log('called from the calledit function xzxx');
-}
+const container = document.querySelector('.container')
 
-calledit()
-
-
-let init = () => {
-  console.log('called from a es6 function')
-}
-
-init();
 
