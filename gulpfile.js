@@ -1,9 +1,11 @@
 const gulp = require('gulp')
+const plumber = require('gulp-plumber')
 const del = require('del')
 const concat = require('gulp-concat')
 const babel = require('gulp-babel')
 const sass = require('gulp-sass')
 const browserSync = require('browser-sync').create()
+const cleanCSS = require('gulp-clean-css')
 
 function html() {
   return gulp.src('./src/*.html')
@@ -11,13 +13,15 @@ function html() {
 }
 
 function css() {
-  return gulp.src('./src/css/*.scss')
+  return gulp.src('./src/css/style.scss')
+    .pipe(plumber())
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./dist/css'))
 }
 
 function js() {
   return gulp.src('./src/js/*.js')
+    .pipe(plumber())
     .pipe(babel({
       presets: ['@babel/env']
     }))
@@ -37,7 +41,7 @@ function watch() {
   })
 
   // first rerun the function that distributed the css files, then reload the browser
-  gulp.watch('./src/css/*.scss').on('change', css)
+  gulp.watch('./src/css/**/*.scss').on('change', css)
   gulp.watch('./dist/css/*.css').on('change', browserSync.reload)
 
   // first rerun the function that distributed the javascript files, then reload the browser
