@@ -3,9 +3,26 @@ setupCalculator(calculator, numbers, operators)
 
 function setupCalculator(container, numbers, operators) {
 
+  // output
   let output = document.createElement('div')
   output.classList.add('ouput')
 
+  // Options
+  let optionsContainer = document.createElement('div')
+  optionsContainer.classList.add('options')
+
+  options.forEach(option => {
+    let opt = document.createElement('div')
+    opt.classList.add('option')
+    opt.innerText = option
+    optionsContainer.appendChild(opt)
+
+    opt.addEventListener('click', () => {
+      console.log(`${option} was clicked`)
+    })
+  })
+
+  // Numbers
   let numbersContainer = document.createElement('div')
   numbersContainer.classList.add('numbers')
 
@@ -19,6 +36,7 @@ function setupCalculator(container, numbers, operators) {
     })
   })
 
+  // Operators
   let operatorsContainer = document.createElement('div')
   operatorsContainer.classList.add('operators')
 
@@ -33,6 +51,7 @@ function setupCalculator(container, numbers, operators) {
   })
 
   container.appendChild(output)
+  container.appendChild(optionsContainer)
   container.appendChild(numbersContainer)
   container.appendChild(operatorsContainer)
 }
