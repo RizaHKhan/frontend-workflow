@@ -5,7 +5,6 @@ const concat = require("gulp-concat");
 const babel = require("gulp-babel");
 const sass = require("gulp-sass");
 const browserSync = require("browser-sync").create();
-const cleanCSS = require("gulp-clean-css");
 
 function html() {
   return src("./src/*.html").pipe(dest("./dist"));
