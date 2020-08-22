@@ -18,7 +18,12 @@ function setupCalculator(container, numbers, operators) {
     optionsContainer.appendChild(opt)
 
     opt.addEventListener('click', () => {
-      console.log(`${option} was clicked`)
+      if (option === 'C') {
+        first = []
+        second = []
+        operation = []
+        answer = 0
+      }
     })
   })
 
@@ -32,7 +37,11 @@ function setupCalculator(container, numbers, operators) {
     num.innerText = number
     numbersContainer.appendChild(num)
     num.addEventListener('click', () => {
-      console.log(`${number} was clicked`)
+      if (operation.length) {
+        second.push(number)
+      } else {
+        first.push(number)
+      }
     })
   })
 
@@ -46,7 +55,11 @@ function setupCalculator(container, numbers, operators) {
     op.innerText = operator
     operatorsContainer.appendChild(op)
     op.addEventListener('click', () => {
-      console.log(`${operator} was clicked`)
+      if (operator === '=') {
+        printAnswer(first, operation, second, output)
+      } else {
+        operation = operator
+      }
     })
   })
 
@@ -56,3 +69,7 @@ function setupCalculator(container, numbers, operators) {
   container.appendChild(operatorsContainer)
 }
 
+function printAnswer(first, operation, second, container) {
+  answer = parseInt(first.join('')) + operation + parseInt(second.join(''))
+  container.innerText = answer
+}
