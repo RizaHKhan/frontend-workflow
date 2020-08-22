@@ -22,7 +22,7 @@ function setupCalculator(container, numbers, operators) {
         first = []
         second = []
         operation = []
-        answer = 0
+        output.innerText = ''
       }
     })
   })
@@ -64,6 +64,7 @@ function setupCalculator(container, numbers, operators) {
         operation = ''
       } else {
         operation = operator
+        !first.length && output.innerText ? first.push(output.innerText) : ''
         output.innerText += operator
       }
     })
