@@ -39,7 +39,9 @@ function setupCalculator(container, numbers, operators) {
     num.addEventListener('click', () => {
       if (operation.length) {
         second.push(number)
+        output.innerText += number
       } else {
+        first.length ? output.innerText += number : output.innerText = number
         first.push(number)
       }
     })
@@ -57,8 +59,12 @@ function setupCalculator(container, numbers, operators) {
     op.addEventListener('click', () => {
       if (operator === '=') {
         printAnswer(first, operation, second, output)
+        first = []
+        second = []
+        operation = ''
       } else {
         operation = operator
+        output.innerText += operator
       }
     })
   })
@@ -70,6 +76,6 @@ function setupCalculator(container, numbers, operators) {
 }
 
 function printAnswer(first, operation, second, container) {
-  answer = parseInt(first.join('')) + operation + parseInt(second.join(''))
+  answer = eval(parseInt(first.join('')) + operation + parseInt(second.join('')))
   container.innerText = answer
 }
